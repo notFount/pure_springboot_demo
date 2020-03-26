@@ -1,0 +1,418 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zyp.dao.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.zyp.pojo.User" >
+    <id column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="user_password" property="userPassword" jdbcType="VARCHAR" />
+    <result column="user_orgname" property="userOrgname" jdbcType="VARCHAR" />
+    <result column="user_orgcode" property="userOrgcode" jdbcType="VARCHAR" />
+    <result column="user_city" property="userCity" jdbcType="VARCHAR" />
+    <result column="user_pename" property="userPename" jdbcType="VARCHAR" />
+    <result column="user_idcode" property="userIdcode" jdbcType="VARCHAR" />
+    <result column="user_status" property="userStatus" jdbcType="VARCHAR" />
+    <result column="user_editmessage" property="userEditmessage" jdbcType="VARCHAR" />
+    <result column="user_verifystatus" property="userVerifystatus" jdbcType="VARCHAR" />
+    <result column="user_createTime" property="userCreatetime" jdbcType="TIMESTAMP" />
+    <result column="user_modifiedTime" property="userModifiedtime" jdbcType="TIMESTAMP" />
+    <result column="user_strOne" property="userStrone" jdbcType="VARCHAR" />
+    <result column="user_strTwo" property="userStrtwo" jdbcType="VARCHAR" />
+    <result column="user_strThree" property="userStrthree" jdbcType="VARCHAR" />
+    <result column="user_strFour" property="userStrfour" jdbcType="VARCHAR" />
+    <result column="user_strFive" property="userStrfive" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    user_id, user_name, user_password, user_orgname, user_orgcode, user_city, user_pename, 
+    user_idcode, user_status, user_editmessage, user_verifystatus, user_createTime, user_modifiedTime, 
+    user_strOne, user_strTwo, user_strThree, user_strFour, user_strFive
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zyp.pojo.UserExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where user_id = #{userId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from user
+    where user_id = #{userId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zyp.pojo.UserExample" >
+    delete from user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zyp.pojo.User" >
+    insert into user (user_id, user_name, user_password, 
+      user_orgname, user_orgcode, user_city, 
+      user_pename, user_idcode, user_status, 
+      user_editmessage, user_verifystatus, user_createTime, 
+      user_modifiedTime, user_strOne, user_strTwo, 
+      user_strThree, user_strFour, user_strFive
+      )
+    values (#{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{userPassword,jdbcType=VARCHAR}, 
+      #{userOrgname,jdbcType=VARCHAR}, #{userOrgcode,jdbcType=VARCHAR}, #{userCity,jdbcType=VARCHAR}, 
+      #{userPename,jdbcType=VARCHAR}, #{userIdcode,jdbcType=VARCHAR}, #{userStatus,jdbcType=VARCHAR}, 
+      #{userEditmessage,jdbcType=VARCHAR}, #{userVerifystatus,jdbcType=VARCHAR}, #{userCreatetime,jdbcType=TIMESTAMP}, 
+      #{userModifiedtime,jdbcType=TIMESTAMP}, #{userStrone,jdbcType=VARCHAR}, #{userStrtwo,jdbcType=VARCHAR}, 
+      #{userStrthree,jdbcType=VARCHAR}, #{userStrfour,jdbcType=VARCHAR}, #{userStrfive,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zyp.pojo.User" >
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="userName != null" >
+        user_name,
+      </if>
+      <if test="userPassword != null" >
+        user_password,
+      </if>
+      <if test="userOrgname != null" >
+        user_orgname,
+      </if>
+      <if test="userOrgcode != null" >
+        user_orgcode,
+      </if>
+      <if test="userCity != null" >
+        user_city,
+      </if>
+      <if test="userPename != null" >
+        user_pename,
+      </if>
+      <if test="userIdcode != null" >
+        user_idcode,
+      </if>
+      <if test="userStatus != null" >
+        user_status,
+      </if>
+      <if test="userEditmessage != null" >
+        user_editmessage,
+      </if>
+      <if test="userVerifystatus != null" >
+        user_verifystatus,
+      </if>
+      <if test="userCreatetime != null" >
+        user_createTime,
+      </if>
+      <if test="userModifiedtime != null" >
+        user_modifiedTime,
+      </if>
+      <if test="userStrone != null" >
+        user_strOne,
+      </if>
+      <if test="userStrtwo != null" >
+        user_strTwo,
+      </if>
+      <if test="userStrthree != null" >
+        user_strThree,
+      </if>
+      <if test="userStrfour != null" >
+        user_strFour,
+      </if>
+      <if test="userStrfive != null" >
+        user_strFive,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPassword != null" >
+        #{userPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="userOrgname != null" >
+        #{userOrgname,jdbcType=VARCHAR},
+      </if>
+      <if test="userOrgcode != null" >
+        #{userOrgcode,jdbcType=VARCHAR},
+      </if>
+      <if test="userCity != null" >
+        #{userCity,jdbcType=VARCHAR},
+      </if>
+      <if test="userPename != null" >
+        #{userPename,jdbcType=VARCHAR},
+      </if>
+      <if test="userIdcode != null" >
+        #{userIdcode,jdbcType=VARCHAR},
+      </if>
+      <if test="userStatus != null" >
+        #{userStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="userEditmessage != null" >
+        #{userEditmessage,jdbcType=VARCHAR},
+      </if>
+      <if test="userVerifystatus != null" >
+        #{userVerifystatus,jdbcType=VARCHAR},
+      </if>
+      <if test="userCreatetime != null" >
+        #{userCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userModifiedtime != null" >
+        #{userModifiedtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userStrone != null" >
+        #{userStrone,jdbcType=VARCHAR},
+      </if>
+      <if test="userStrtwo != null" >
+        #{userStrtwo,jdbcType=VARCHAR},
+      </if>
+      <if test="userStrthree != null" >
+        #{userStrthree,jdbcType=VARCHAR},
+      </if>
+      <if test="userStrfour != null" >
+        #{userStrfour,jdbcType=VARCHAR},
+      </if>
+      <if test="userStrfive != null" >
+        #{userStrfive,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zyp.pojo.UserExample" resultType="java.lang.Integer" >
+    select count(*) from user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update user
+    <set >
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.userName != null" >
+        user_name = #{record.userName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userPassword != null" >
+        user_password = #{record.userPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userOrgname != null" >
+        user_orgname = #{record.userOrgname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userOrgcode != null" >
+        user_orgcode = #{record.userOrgcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userCity != null" >
+        user_city = #{record.userCity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userPename != null" >
+        user_pename = #{record.userPename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userIdcode != null" >
+        user_idcode = #{record.userIdcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userStatus != null" >
+        user_status = #{record.userStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userEditmessage != null" >
+        user_editmessage = #{record.userEditmessage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userVerifystatus != null" >
+        user_verifystatus = #{record.userVerifystatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userCreatetime != null" >
+        user_createTime = #{record.userCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.userModifiedtime != null" >
+        user_modifiedTime = #{record.userModifiedtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.userStrone != null" >
+        user_strOne = #{record.userStrone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userStrtwo != null" >
+        user_strTwo = #{record.userStrtwo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userStrthree != null" >
+        user_strThree = #{record.userStrthree,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userStrfour != null" >
+        user_strFour = #{record.userStrfour,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userStrfive != null" >
+        user_strFive = #{record.userStrfive,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update user
+    set user_id = #{record.userId,jdbcType=INTEGER},
+      user_name = #{record.userName,jdbcType=VARCHAR},
+      user_password = #{record.userPassword,jdbcType=VARCHAR},
+      user_orgname = #{record.userOrgname,jdbcType=VARCHAR},
+      user_orgcode = #{record.userOrgcode,jdbcType=VARCHAR},
+      user_city = #{record.userCity,jdbcType=VARCHAR},
+      user_pename = #{record.userPename,jdbcType=VARCHAR},
+      user_idcode = #{record.userIdcode,jdbcType=VARCHAR},
+      user_status = #{record.userStatus,jdbcType=VARCHAR},
+      user_editmessage = #{record.userEditmessage,jdbcType=VARCHAR},
+      user_verifystatus = #{record.userVerifystatus,jdbcType=VARCHAR},
+      user_createTime = #{record.userCreatetime,jdbcType=TIMESTAMP},
+      user_modifiedTime = #{record.userModifiedtime,jdbcType=TIMESTAMP},
+      user_strOne = #{record.userStrone,jdbcType=VARCHAR},
+      user_strTwo = #{record.userStrtwo,jdbcType=VARCHAR},
+      user_strThree = #{record.userStrthree,jdbcType=VARCHAR},
+      user_strFour = #{record.userStrfour,jdbcType=VARCHAR},
+      user_strFive = #{record.userStrfive,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zyp.pojo.User" >
+    update user
+    <set >
+      <if test="userName != null" >
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPassword != null" >
+        user_password = #{userPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="userOrgname != null" >
+        user_orgname = #{userOrgname,jdbcType=VARCHAR},
+      </if>
+      <if test="userOrgcode != null" >
+        user_orgcode = #{userOrgcode,jdbcType=VARCHAR},
+      </if>
+      <if test="userCity != null" >
+        user_city = #{userCity,jdbcType=VARCHAR},
+      </if>
+      <if test="userPename != null" >
+        user_pename = #{userPename,jdbcType=VARCHAR},
+      </if>
+      <if test="userIdcode != null" >
+        user_idcode = #{userIdcode,jdbcType=VARCHAR},
+      </if>
+      <if test="userStatus != null" >
+        user_status = #{userStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="userEditmessage != null" >
+        user_editmessage = #{userEditmessage,jdbcType=VARCHAR},
+      </if>
+      <if test="userVerifystatus != null" >
+        user_verifystatus = #{userVerifystatus,jdbcType=VARCHAR},
+      </if>
+      <if test="userCreatetime != null" >
+        user_createTime = #{userCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userModifiedtime != null" >
+        user_modifiedTime = #{userModifiedtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userStrone != null" >
+        user_strOne = #{userStrone,jdbcType=VARCHAR},
+      </if>
+      <if test="userStrtwo != null" >
+        user_strTwo = #{userStrtwo,jdbcType=VARCHAR},
+      </if>
+      <if test="userStrthree != null" >
+        user_strThree = #{userStrthree,jdbcType=VARCHAR},
+      </if>
+      <if test="userStrfour != null" >
+        user_strFour = #{userStrfour,jdbcType=VARCHAR},
+      </if>
+      <if test="userStrfive != null" >
+        user_strFive = #{userStrfive,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zyp.pojo.User" >
+    update user
+    set user_name = #{userName,jdbcType=VARCHAR},
+      user_password = #{userPassword,jdbcType=VARCHAR},
+      user_orgname = #{userOrgname,jdbcType=VARCHAR},
+      user_orgcode = #{userOrgcode,jdbcType=VARCHAR},
+      user_city = #{userCity,jdbcType=VARCHAR},
+      user_pename = #{userPename,jdbcType=VARCHAR},
+      user_idcode = #{userIdcode,jdbcType=VARCHAR},
+      user_status = #{userStatus,jdbcType=VARCHAR},
+      user_editmessage = #{userEditmessage,jdbcType=VARCHAR},
+      user_verifystatus = #{userVerifystatus,jdbcType=VARCHAR},
+      user_createTime = #{userCreatetime,jdbcType=TIMESTAMP},
+      user_modifiedTime = #{userModifiedtime,jdbcType=TIMESTAMP},
+      user_strOne = #{userStrone,jdbcType=VARCHAR},
+      user_strTwo = #{userStrtwo,jdbcType=VARCHAR},
+      user_strThree = #{userStrthree,jdbcType=VARCHAR},
+      user_strFour = #{userStrfour,jdbcType=VARCHAR},
+      user_strFive = #{userStrfive,jdbcType=VARCHAR}
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+</mapper>
